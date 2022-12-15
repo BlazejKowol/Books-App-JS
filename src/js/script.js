@@ -69,27 +69,34 @@
         if(event.target.checked == true) {
           filters.push(event.target.value);
         } else {
-          //filters.indexOf(event.target.value);
-          //filters.splice(event.target.value, 1);
-          filters.pop(event.target.value);
+          filters.indexOf(event.target.value);
+          filters.splice(event.target.value, 1);
         }
         console.log('filters', filters);
       }
+      books.filterBooks();
     });
-    /*const books = document.querySelectorAll(settings.books.image); - czemu ta opcja jest w tym momencie zła i nie możemy wskazać na zdjęcie każdej z książek? Event target powoduje, że musimy wybrać cały element, którym jest kontener?
-    for(let book of books){
-      book.addEventListener('dblclick', function(event){
-        event.preventDefault();
-        const bookId = book.getAttribute(settings.containterOf.bookId);
-        if(!favoriteBooks.includes(bookId)){
-          book.classList.add(classNames.bookFavorite);
-          favoriteBooks.push(bookId);
-        } else {
-          book.classList.remove(classNames.bookFavorite);
-          favoriteBooks.pop(bookId);
+  }
+
+  filterBooks() {
+    for(const book of dataSource.books) {
+      let shouldBeHidden = false;
+      for(const filter of filters) {
+        if(!book.details[filter]) {
+          shouldBeHidden = true;
+          break;
         }
-      });
-    }*/
+      }
+      const bookImage = document.querySelector('.book__Image[data-id="' + book.id + '"]');
+
+      if(shouldBeHidden) {
+        shouldBeHidden == true;
+        bookImage.classList.add('hidden');
+      } else {
+        bookImage.classList.remove('hidden');
+      }
+      console.log(bookImage);
+    }
   }
 
   render();
