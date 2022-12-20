@@ -162,7 +162,6 @@
       thisBooksList.render();
       thisBooksList.getElements();
       thisBooksList.initActions();
-      thisBooksList.filterBooks();
       thisBooksList.determineRatingBgc();
     }
 
@@ -171,7 +170,7 @@
 
       for(let book of thisBooksList.data){
         const ratingBgc = thisBooksList.determineRatingBgc(book.rating);
-        const ratingWidth = ratingBgc * 10;
+        const ratingWidth = book.rating * 10;
   
         book.ratingBgc = ratingBgc;
         book.ratingWidth = ratingWidth;
@@ -220,6 +219,7 @@
             thisBooksList.filters.splice(event.target.value, 1);
           }
           console.log('filters', thisBooksList.filters);
+          thisBooksList.filterBooks();
         }
       });
     }
